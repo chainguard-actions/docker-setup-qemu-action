@@ -1,0 +1,4 @@
+{
+  "upstream": "docker/setup-qemu-action",
+  "version": "v4.0.0"
+}
