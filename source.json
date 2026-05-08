@@ -1,4 +1,6 @@
 {
-  "upstream": "docker/setup-qemu-action",
-  "version": "v4.0.0"
+  "owner": "docker",
+  "repo": "setup-qemu-action",
+  "version": "",
+  "url": "https://github.com/docker/setup-qemu-action"
 }
