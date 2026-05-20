@@ -1,7 +1,0 @@
-{
-  "owner": "docker",
-  "name": "setup-qemu-action",
-  "visibility": "internal",
-  "description": "GitHub Action to install QEMU static binaries",
-  "block_publish": false
-}
