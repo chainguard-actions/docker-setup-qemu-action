@@ -1,6 +1,6 @@
 # docker/setup-qemu-action
 
-GitHub Action to install QEMU static binaries
+Install QEMU static binaries
 
 Hardened by [Chainguard](https://www.chainguard.dev) from the upstream action at [https://github.com/docker/setup-qemu-action](https://github.com/docker/setup-qemu-action).
 
@@ -8,7 +8,7 @@ Hardened by [Chainguard](https://www.chainguard.dev) from the upstream action at
 
 | Version | Tag | Upstream commit |
 |---------|-----|-----------------|
-| v4.0.0 | [`v4.0.0`](https://github.com/chainguard-actions/docker-setup-qemu-action/tree/v4.0.0) | — |
+| v4.0.0 | [`v4.0.0`](https://github.com/chainguard-actions/docker-setup-qemu-action/tree/v4.0.0) | [`ce36039`](https://github.com/docker/setup-qemu-action/commit/ce360397dd3f832beb865e1373c09c0e9f86d70a) |
 
 ## Privacy
 
