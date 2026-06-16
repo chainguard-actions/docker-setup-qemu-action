@@ -9,6 +9,7 @@ Hardened by [Chainguard](https://www.chainguard.dev) from the upstream action at
 | Version | Tag | Upstream commit |
 |---------|-----|-----------------|
 | v4.0.0 | [`v4.0.0`](https://github.com/chainguard-actions/docker-setup-qemu-action/tree/v4.0.0) | [`ce36039`](https://github.com/docker/setup-qemu-action/commit/ce360397dd3f832beb865e1373c09c0e9f86d70a) |
+| v4.1.0 | [`v4.1.0`](https://github.com/chainguard-actions/docker-setup-qemu-action/tree/v4.1.0) | [`0611638`](https://github.com/docker/setup-qemu-action/commit/06116385d9baf250c9f4dcb4858b16962ea869c3) |
 
 ## Privacy
 
