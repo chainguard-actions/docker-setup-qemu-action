@@ -1,16 +1,77 @@
-# docker/setup-qemu-action
+[![GitHub release](https://img.shields.io/github/release/docker/setup-qemu-action.svg?style=flat-square)](https://github.com/docker/setup-qemu-action/releases/latest)
+[![GitHub marketplace](https://img.shields.io/badge/marketplace-docker--setup--qemu-blue?logo=github&style=flat-square)](https://github.com/marketplace/actions/docker-setup-qemu)
+[![CI workflow](https://img.shields.io/github/actions/workflow/status/docker/setup-qemu-action/ci.yml?branch=master&label=ci&logo=github&style=flat-square)](https://github.com/docker/setup-qemu-action/actions?workflow=ci)
+[![Test workflow](https://img.shields.io/github/actions/workflow/status/docker/setup-qemu-action/test.yml?branch=master&label=test&logo=github&style=flat-square)](https://github.com/docker/setup-qemu-action/actions?workflow=test)
+[![Codecov](https://img.shields.io/codecov/c/github/docker/setup-qemu-action?logo=codecov&style=flat-square)](https://codecov.io/gh/docker/setup-qemu-action)
 
-Install QEMU static binaries
+## About
 
-Hardened by [Chainguard](https://www.chainguard.dev) from the upstream action at [https://github.com/docker/setup-qemu-action](https://github.com/docker/setup-qemu-action).
+GitHub Action to install [QEMU](https://github.com/qemu/qemu) static binaries.
 
-## Versions
+![Screenshot](.github/setup-qemu-action.png)
 
-| Version | Tag | Upstream commit |
-|---------|-----|-----------------|
-| v4.0.0 | [`v4.0.0`](https://github.com/chainguard-actions/docker-setup-qemu-action/tree/v4.0.0) | [`ce36039`](https://github.com/docker/setup-qemu-action/commit/ce360397dd3f832beb865e1373c09c0e9f86d70a) |
-| v4.1.0 | [`v4.1.0`](https://github.com/chainguard-actions/docker-setup-qemu-action/tree/v4.1.0) | [`0611638`](https://github.com/docker/setup-qemu-action/commit/06116385d9baf250c9f4dcb4858b16962ea869c3) |
-| v4.2.0 | [`v4.2.0`](https://github.com/chainguard-actions/docker-setup-qemu-action/tree/v4.2.0) | [`96fe6ef`](https://github.com/docker/setup-qemu-action/commit/96fe6ef7f33517b61c61be40b68a1882f3264fb8) |
+___
+
+* [Usage](#usage)
+* [Customizing](#customizing)
+  * [inputs](#inputs)
+  * [outputs](#outputs)
+* [Contributing](#contributing)
+
+## Usage
+
+```yaml
+name: ci
+
+on:
+  push:
+
+jobs:
+  qemu:
+    runs-on: ubuntu-latest
+    steps:
+      -
+        name: Set up QEMU
+        uses: docker/setup-qemu-action@v3
+```
+
+> [!NOTE]
+> If you are using [`docker/setup-buildx-action`](https://github.com/docker/setup-buildx-action),
+> this action should come before it:
+> 
+> ```yaml
+>     -
+>       name: Set up QEMU
+>       uses: docker/setup-qemu-action@v3
+>     -
+>       name: Set up Docker Buildx
+>       uses: docker/setup-buildx-action@v3
+> ```
+
+## Customizing
+
+### inputs
+
+The following inputs can be used as `step.with` keys:
+
+| Name          | Type   | Default                                                                       | Description                                        |
+|---------------|--------|-------------------------------------------------------------------------------|----------------------------------------------------|
+| `image`       | String | [`tonistiigi/binfmt:latest`](https://hub.docker.com/r/tonistiigi/binfmt/tags) | QEMU static binaries Docker image                  |
+| `platforms`   | String | `all`                                                                         | Platforms to install (e.g., `arm64,riscv64,arm`)   |
+| `cache-image` | Bool   | `true`                                                                        | Cache binfmt image to GitHub Actions cache backend |
+
+### outputs
+
+The following outputs are available:
+
+| Name          | Type    | Description                           |
+|---------------|---------|---------------------------------------|
+| `platforms`   | String  | Available platforms (comma separated) |
+
+## Contributing
+
+Want to contribute? Awesome! You can find information about contributing to
+this project in the [CONTRIBUTING.md](/.github/CONTRIBUTING.md)
 
 ## Privacy
 

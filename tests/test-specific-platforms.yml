@@ -1,0 +1,33 @@
+name: Test specific platforms
+on:
+  workflow_dispatch:
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+      - id: qemu
+        uses: .
+        with:
+          platforms: arm64,arm
+          cache-image: 'false'
+      - name: Assert platforms output is non-empty
+        env:
+          ACTUAL: ${{ steps.qemu.outputs.platforms }}
+        run: |
+          echo "actual: $ACTUAL"
+          if [ -z "$ACTUAL" ]; then
+            echo "FAIL: expected platforms output to be non-empty"
+            exit 1
+          fi
+          echo "PASS: platforms=$ACTUAL"
+      - name: Assert arm64 is in platforms
+        env:
+          ACTUAL: ${{ steps.qemu.outputs.platforms }}
+        run: |
+          echo "actual: $ACTUAL"
+          if ! echo "$ACTUAL" | grep -q "arm64"; then
+            echo "FAIL: expected arm64 in platforms output"
+            exit 1
+          fi
+          echo "PASS: arm64 found in platforms"

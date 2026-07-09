@@ -1,0 +1,34 @@
+name: Test custom QEMU image
+on:
+  workflow_dispatch:
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+      - id: qemu
+        uses: .
+        with:
+          image: docker.io/tonistiigi/binfmt:qemu-v8.1.5
+          platforms: arm64
+          cache-image: 'false'
+      - name: Assert platforms output is non-empty
+        env:
+          ACTUAL: ${{ steps.qemu.outputs.platforms }}
+        run: |
+          echo "actual: $ACTUAL"
+          if [ -z "$ACTUAL" ]; then
+            echo "FAIL: expected platforms output to be non-empty when using custom image"
+            exit 1
+          fi
+          echo "PASS: platforms=$ACTUAL"
+      - name: Assert arm64 is in platforms
+        env:
+          ACTUAL: ${{ steps.qemu.outputs.platforms }}
+        run: |
+          echo "actual: $ACTUAL"
+          if ! echo "$ACTUAL" | grep -q "arm64"; then
+            echo "FAIL: expected arm64 in platforms output with custom image"
+            exit 1
+          fi
+          echo "PASS: arm64 found in platforms with custom image"
