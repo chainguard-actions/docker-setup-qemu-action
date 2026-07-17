@@ -1,4 +1,4 @@
-name: Test custom QEMU image
+name: Test custom binfmt image input
 on:
   workflow_dispatch:
 jobs:
@@ -9,7 +9,7 @@ jobs:
       - id: qemu
         uses: .
         with:
-          image: docker.io/tonistiigi/binfmt:qemu-v8.1.5
+          image: docker.io/tonistiigi/binfmt:latest
           platforms: arm64
           cache-image: 'false'
       - name: Assert platforms output is non-empty
@@ -18,17 +18,17 @@ jobs:
         run: |
           echo "actual: $ACTUAL"
           if [ -z "$ACTUAL" ]; then
-            echo "FAIL: expected platforms output to be non-empty when using custom image"
+            echo "FAIL: expected platforms output to be non-empty"
             exit 1
           fi
           echo "PASS: platforms=$ACTUAL"
-      - name: Assert arm64 is in platforms
+      - name: Assert linux/arm64 is in platforms
         env:
           ACTUAL: ${{ steps.qemu.outputs.platforms }}
         run: |
           echo "actual: $ACTUAL"
-          if ! echo "$ACTUAL" | grep -q "arm64"; then
-            echo "FAIL: expected arm64 in platforms output with custom image"
+          if ! echo "$ACTUAL" | grep -q "linux/arm64"; then
+            echo "FAIL: expected linux/arm64 in platforms output"
             exit 1
           fi
-          echo "PASS: arm64 found in platforms with custom image"
+          echo "PASS"

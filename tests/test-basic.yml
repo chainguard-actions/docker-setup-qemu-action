@@ -1,4 +1,4 @@
-name: Test basic usage (all platforms)
+name: Test basic usage (default platforms)
 on:
   workflow_dispatch:
 jobs:
@@ -21,13 +21,13 @@ jobs:
             exit 1
           fi
           echo "PASS: platforms=$ACTUAL"
-      - name: Assert linux/amd64 is in platforms
+      - name: Assert linux/arm64 is in platforms
         env:
           ACTUAL: ${{ steps.qemu.outputs.platforms }}
         run: |
           echo "actual: $ACTUAL"
-          if ! echo "$ACTUAL" | grep -q "linux/amd64"; then
-            echo "FAIL: expected linux/amd64 in platforms output"
+          if ! echo "$ACTUAL" | grep -q "linux/arm64"; then
+            echo "FAIL: expected linux/arm64 in platforms output"
             exit 1
           fi
-          echo "PASS: linux/amd64 found in platforms"
+          echo "PASS"

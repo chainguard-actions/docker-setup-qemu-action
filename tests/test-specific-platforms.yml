@@ -1,4 +1,4 @@
-name: Test specific platforms
+name: Test specific platforms input
 on:
   workflow_dispatch:
 jobs:
@@ -21,13 +21,23 @@ jobs:
             exit 1
           fi
           echo "PASS: platforms=$ACTUAL"
-      - name: Assert arm64 is in platforms
+      - name: Assert linux/arm64 is in platforms
         env:
           ACTUAL: ${{ steps.qemu.outputs.platforms }}
         run: |
           echo "actual: $ACTUAL"
-          if ! echo "$ACTUAL" | grep -q "arm64"; then
-            echo "FAIL: expected arm64 in platforms output"
+          if ! echo "$ACTUAL" | grep -q "linux/arm64"; then
+            echo "FAIL: expected linux/arm64 in platforms output"
             exit 1
           fi
-          echo "PASS: arm64 found in platforms"
+          echo "PASS"
+      - name: Assert linux/arm is in platforms
+        env:
+          ACTUAL: ${{ steps.qemu.outputs.platforms }}
+        run: |
+          echo "actual: $ACTUAL"
+          if ! echo "$ACTUAL" | grep -q "linux/arm"; then
+            echo "FAIL: expected linux/arm in platforms output"
+            exit 1
+          fi
+          echo "PASS"
