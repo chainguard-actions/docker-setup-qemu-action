@@ -9,26 +9,26 @@ jobs:
       - id: qemu
         uses: .
         with:
-          platforms: arm64,arm
-          cache-image: 'false'
+          platforms: arm64
+          cache-image: false
       - name: Assert platforms output is non-empty
         env:
-          PLATFORMS: ${{ steps.qemu.outputs.platforms }}
+          ACTUAL: ${{ steps.qemu.outputs.platforms }}
         run: |
-          echo "platforms: $PLATFORMS"
-          if [ -z "$PLATFORMS" ]; then
+          echo "actual platforms: $ACTUAL"
+          if [ -z "$ACTUAL" ]; then
             echo "FAIL: expected platforms output to be non-empty"
             exit 1
           fi
-          echo "PASS"
-      - name: Assert arm64 platform is available
+          echo "PASS: platforms output is non-empty"
+      - name: Assert linux/arm64 is in platforms
         env:
-          PLATFORMS: ${{ steps.qemu.outputs.platforms }}
+          ACTUAL: ${{ steps.qemu.outputs.platforms }}
         run: |
-          echo "platforms: $PLATFORMS"
-          if echo "$PLATFORMS" | grep -q "arm64"; then
-            echo "PASS: arm64 found in platforms"
+          echo "actual platforms: $ACTUAL"
+          if echo "$ACTUAL" | grep -q "linux/arm64"; then
+            echo "PASS: linux/arm64 found in platforms"
           else
-            echo "FAIL: arm64 not found in platforms output"
+            echo "FAIL: linux/arm64 not found in platforms: $ACTUAL"
             exit 1
           fi

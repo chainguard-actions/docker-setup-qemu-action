@@ -1,4 +1,4 @@
-name: Test basic usage (default platforms)
+name: Test multiple specific platforms
 on:
   workflow_dispatch:
 jobs:
@@ -9,7 +9,7 @@ jobs:
       - id: qemu
         uses: .
         with:
-          platforms: all
+          platforms: arm64,arm
           cache-image: false
       - name: Assert platforms output is non-empty
         env:
@@ -21,14 +21,25 @@ jobs:
             exit 1
           fi
           echo "PASS: platforms output is non-empty"
-      - name: Assert linux/amd64 is in platforms
+      - name: Assert linux/arm64 is in platforms
         env:
           ACTUAL: ${{ steps.qemu.outputs.platforms }}
         run: |
           echo "actual platforms: $ACTUAL"
-          if echo "$ACTUAL" | grep -q "linux/amd64"; then
-            echo "PASS: linux/amd64 found in platforms"
+          if echo "$ACTUAL" | grep -q "linux/arm64"; then
+            echo "PASS: linux/arm64 found in platforms"
           else
-            echo "FAIL: linux/amd64 not found in platforms: $ACTUAL"
+            echo "FAIL: linux/arm64 not found in platforms: $ACTUAL"
+            exit 1
+          fi
+      - name: Assert linux/arm is in platforms
+        env:
+          ACTUAL: ${{ steps.qemu.outputs.platforms }}
+        run: |
+          echo "actual platforms: $ACTUAL"
+          if echo "$ACTUAL" | grep -q "linux/arm"; then
+            echo "PASS: linux/arm found in platforms"
+          else
+            echo "FAIL: linux/arm not found in platforms: $ACTUAL"
             exit 1
           fi
