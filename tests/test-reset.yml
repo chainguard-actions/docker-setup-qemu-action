@@ -1,0 +1,52 @@
+name: Test reset mode
+on:
+  workflow_dispatch:
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+      # First install to have something to reset
+      - id: qemu-initial
+        uses: .
+        with:
+          platforms: arm64
+          cache-image: false
+      - name: Assert initial install succeeded
+        env:
+          PLATFORMS: ${{ steps.qemu-initial.outputs.platforms }}
+        run: |
+          echo "initial platforms: $PLATFORMS"
+          if [ -z "$PLATFORMS" ]; then
+            echo "FAIL: expected initial platforms output to be non-empty"
+            exit 1
+          fi
+          echo "PASS: initial install succeeded"
+      # Now reset and reinstall
+      - id: qemu-reset
+        uses: .
+        with:
+          platforms: arm64
+          reset: true
+          cache-image: false
+      - name: Assert reset install succeeded
+        env:
+          PLATFORMS: ${{ steps.qemu-reset.outputs.platforms }}
+        run: |
+          echo "platforms after reset: $PLATFORMS"
+          if [ -z "$PLATFORMS" ]; then
+            echo "FAIL: expected platforms output to be non-empty after reset"
+            exit 1
+          fi
+          echo "PASS: reset install succeeded"
+      - name: Assert linux/arm64 is still available after reset
+        env:
+          PLATFORMS: ${{ steps.qemu-reset.outputs.platforms }}
+        run: |
+          echo "platforms: $PLATFORMS"
+          if echo "$PLATFORMS" | grep -q "linux/arm64"; then
+            echo "PASS: linux/arm64 found in platforms after reset"
+          else
+            echo "FAIL: linux/arm64 not found in platforms after reset"
+            exit 1
+          fi
