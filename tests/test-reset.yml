@@ -1,0 +1,52 @@
+name: Test reset mode
+on:
+  workflow_dispatch:
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+      - name: Initial QEMU setup
+        id: qemu-initial
+        uses: .
+        with:
+          platforms: arm64
+          cache-image: 'false'
+      - name: Assert initial setup succeeded
+        env:
+          PLATFORMS: ${{ steps.qemu-initial.outputs.platforms }}
+        run: |
+          echo "initial platforms: $PLATFORMS"
+          if [ -z "$PLATFORMS" ]; then
+            echo "FAIL: expected platforms output to be non-empty after initial setup"
+            exit 1
+          fi
+          echo "PASS: initial setup platforms=$PLATFORMS"
+      - name: QEMU setup with reset
+        id: qemu-reset
+        uses: .
+        with:
+          platforms: arm64
+          reset: 'true'
+          cache-image: 'false'
+      - name: Assert reset setup succeeded
+        env:
+          PLATFORMS: ${{ steps.qemu-reset.outputs.platforms }}
+        run: |
+          echo "reset platforms: $PLATFORMS"
+          if [ -z "$PLATFORMS" ]; then
+            echo "FAIL: expected platforms output to be non-empty after reset"
+            exit 1
+          fi
+          echo "PASS: reset setup platforms=$PLATFORMS"
+      - name: Assert linux/arm64 is in reset platforms
+        env:
+          PLATFORMS: ${{ steps.qemu-reset.outputs.platforms }}
+        run: |
+          echo "platforms: $PLATFORMS"
+          if echo "$PLATFORMS" | grep -q "linux/arm64"; then
+            echo "PASS: linux/arm64 found in platforms after reset"
+          else
+            echo "FAIL: linux/arm64 not found in platforms after reset: $PLATFORMS"
+            exit 1
+          fi
