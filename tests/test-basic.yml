@@ -1,0 +1,31 @@
+name: Test basic usage (all platforms)
+on:
+  workflow_dispatch:
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+      - id: qemu
+        uses: .
+      - name: Assert platforms output is non-empty
+        env:
+          PLATFORMS: ${{ steps.qemu.outputs.platforms }}
+        run: |
+          echo "platforms: $PLATFORMS"
+          if [ -z "$PLATFORMS" ]; then
+            echo "FAIL: expected non-empty platforms output"
+            exit 1
+          fi
+          echo "PASS: got platforms: $PLATFORMS"
+      - name: Assert linux/amd64 is in platforms
+        env:
+          PLATFORMS: ${{ steps.qemu.outputs.platforms }}
+        run: |
+          echo "platforms: $PLATFORMS"
+          if echo "$PLATFORMS" | grep -q "linux/amd64"; then
+            echo "PASS: linux/amd64 found in platforms"
+          else
+            echo "FAIL: linux/amd64 not found in platforms output: $PLATFORMS"
+            exit 1
+          fi
