@@ -6,15 +6,15 @@ Hardened by [Chainguard](https://www.chainguard.dev) from the upstream action at
 
 ## Versions
 
-| Version | Tag | Upstream commit |
-|---------|-----|-----------------|
-| v2.2.0 | [`v2.2.0`](https://github.com/chainguard-actions/docker-setup-qemu-action/tree/v2.2.0) | [`2b82ce8`](https://github.com/docker/setup-qemu-action/commit/2b82ce82d56a2a04d2637cd93a637ae1b359c0a7) |
-| v3 | [`v3`](https://github.com/chainguard-actions/docker-setup-qemu-action/tree/v3) | [`c7c5346`](https://github.com/docker/setup-qemu-action/commit/c7c53464625b32c7a7e944ae62b3e17d2b600130) |
-| v4.0.0 | [`v4.0.0`](https://github.com/chainguard-actions/docker-setup-qemu-action/tree/v4.0.0) | [`ce36039`](https://github.com/docker/setup-qemu-action/commit/ce360397dd3f832beb865e1373c09c0e9f86d70a) |
-| v4.1.0 | [`v4.1.0`](https://github.com/chainguard-actions/docker-setup-qemu-action/tree/v4.1.0) | [`0611638`](https://github.com/docker/setup-qemu-action/commit/06116385d9baf250c9f4dcb4858b16962ea869c3) |
-| v4.2.0 | [`v4.2.0`](https://github.com/chainguard-actions/docker-setup-qemu-action/tree/v4.2.0) | [`96fe6ef`](https://github.com/docker/setup-qemu-action/commit/96fe6ef7f33517b61c61be40b68a1882f3264fb8) |
-| v4.3.0 | [`v4.3.0`](https://github.com/chainguard-actions/docker-setup-qemu-action/tree/v4.3.0) | [`1f40c72`](https://github.com/docker/setup-qemu-action/commit/1f40c72289eff860ee54a304f1438e3cff362e0a) |
-| v4.4.0 | [`v4.4.0`](https://github.com/chainguard-actions/docker-setup-qemu-action/tree/v4.4.0) | [`9901266`](https://github.com/docker/setup-qemu-action/commit/99012661954931238ded8c8b007157a8430204e1) |
+| Version | Tag | Upstream commit | Hardening report |
+|---------|-----|-----------------|------------------|
+| v2.2.0 | [`v2.2.0`](https://github.com/chainguard-actions/docker-setup-qemu-action/tree/v2.2.0) | [`2b82ce8`](https://github.com/docker/setup-qemu-action/commit/2b82ce82d56a2a04d2637cd93a637ae1b359c0a7) | [`HARDENING.md`](https://github.com/chainguard-actions/docker-setup-qemu-action/blob/v2.2.0/HARDENING.md) |
+| v3 | [`v3`](https://github.com/chainguard-actions/docker-setup-qemu-action/tree/v3) | [`c7c5346`](https://github.com/docker/setup-qemu-action/commit/c7c53464625b32c7a7e944ae62b3e17d2b600130) | [`HARDENING.md`](https://github.com/chainguard-actions/docker-setup-qemu-action/blob/v3/HARDENING.md) |
+| v4.0.0 | [`v4.0.0`](https://github.com/chainguard-actions/docker-setup-qemu-action/tree/v4.0.0) | [`ce36039`](https://github.com/docker/setup-qemu-action/commit/ce360397dd3f832beb865e1373c09c0e9f86d70a) | [`HARDENING.md`](https://github.com/chainguard-actions/docker-setup-qemu-action/blob/v4.0.0/HARDENING.md) |
+| v4.1.0 | [`v4.1.0`](https://github.com/chainguard-actions/docker-setup-qemu-action/tree/v4.1.0) | [`0611638`](https://github.com/docker/setup-qemu-action/commit/06116385d9baf250c9f4dcb4858b16962ea869c3) | [`HARDENING.md`](https://github.com/chainguard-actions/docker-setup-qemu-action/blob/v4.1.0/HARDENING.md) |
+| v4.2.0 | [`v4.2.0`](https://github.com/chainguard-actions/docker-setup-qemu-action/tree/v4.2.0) | [`96fe6ef`](https://github.com/docker/setup-qemu-action/commit/96fe6ef7f33517b61c61be40b68a1882f3264fb8) | [`HARDENING.md`](https://github.com/chainguard-actions/docker-setup-qemu-action/blob/v4.2.0/HARDENING.md) |
+| v4.3.0 | [`v4.3.0`](https://github.com/chainguard-actions/docker-setup-qemu-action/tree/v4.3.0) | [`1f40c72`](https://github.com/docker/setup-qemu-action/commit/1f40c72289eff860ee54a304f1438e3cff362e0a) | [`HARDENING.md`](https://github.com/chainguard-actions/docker-setup-qemu-action/blob/v4.3.0/HARDENING.md) |
+| v4.4.0 | [`v4.4.0`](https://github.com/chainguard-actions/docker-setup-qemu-action/tree/v4.4.0) | [`9901266`](https://github.com/docker/setup-qemu-action/commit/99012661954931238ded8c8b007157a8430204e1) | [`HARDENING.md`](https://github.com/chainguard-actions/docker-setup-qemu-action/blob/v4.4.0/HARDENING.md) |
 
 ## Privacy
 
